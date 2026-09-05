@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Jul1en-Lin/pi-image-placeholder.git"
+    "url": "git+https://github.com/Jul1en-Lin/pi-image-placeholder.git"
   },
   "homepage": "https://github.com/Jul1en-Lin/pi-image-placeholder#readme",
   "keywords": [

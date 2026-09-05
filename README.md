@@ -4,6 +4,20 @@
 
 ## 安装
 
+发布到 npm 后，推荐：
+
+```sh
+pi install npm:pi-image-placeholder
+```
+
+从 GitHub 直接安装：
+
+```sh
+pi install git:github.com/Jul1en-Lin/pi-image-placeholder
+```
+
+本地开发安装：
+
 ```sh
 cd ~/prj/pi-image-placeholder
 npm ci --ignore-scripts
