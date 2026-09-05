@@ -1,0 +1,40 @@
+{
+  "name": "pi-image-placeholder",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Atomic image placeholders for pi 0.85.0 on macOS",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jul1en-Lin/pi-image-placeholder.git"
+  },
+  "homepage": "https://github.com/Jul1en-Lin/pi-image-placeholder#readme",
+  "keywords": [
+    "pi-package"
+  ],
+  "pi": {
+    "extensions": [
+      "./src/index.ts"
+    ]
+  },
+  "scripts": {
+    "test": "tsx --test test/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "test:tui": "python3 test/tui-smoke.py"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  },
+  "dependencies": {
+    "@mariozechner/clipboard": "0.3.9"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "0.85.0",
+    "@earendil-works/pi-server": "^0.85.0",
+    "@earendil-works/pi-tui": "0.85.0",
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}
