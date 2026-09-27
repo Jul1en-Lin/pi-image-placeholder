@@ -1,6 +1,6 @@
 # pi-image-placeholder
 
-为 **pi 0.85.0 / macOS / Ghostty / `--tui-mode fullscreen`** 提供 `[Image #N]` 图片占位符。独立 pi 扩展，不修改 pi 安装包或全局原型。已测试与本机 **pi-zentui 0.22.3** 组合。
+为 **pi / macOS / Ghostty / `--tui-mode fullscreen`** 提供 `[Image #N]` 图片占位符。独立 pi 扩展，不修改 pi 安装包或全局原型。已测试与本机 **pi-zentui 0.22.3** 组合。
 
 ## 安装
 
@@ -42,7 +42,7 @@ pi install "$PWD"
 
 ## 发送与隐私
 
-pi 0.85.0 的核心 Ctrl+V 仅插入临时路径，并不自动将普通路径文字转换成图片附件。本扩展在提交时将对象展开为 `[Image #N] "快照路径"`，在 `input` 钩子里附加标准 `{ type: "image", data, mimeType }` 内容，再交由 pi 原有模型请求流程发送。模型无需调用 read 才能看到图片。
+pi 的核心 Ctrl+V 仅插入临时路径，并不自动将普通路径文字转换成图片附件。本扩展在提交时将对象展开为 `[Image #N] "快照路径"`，在 `input` 钩子里附加标准 `{ type: "image", data, mimeType }` 内容，再交由 pi 原有模型请求流程发送。模型无需调用 read 才能看到图片。
 
 聊天记录沿用 pi 原生文本/图片展示，因此发送后可能显示快照路径；本扩展只保证编辑框里的紧凑显示。提交内容不包含内部不可见身份标记。截图原始字节作为附件提交，不另行缩放；模型/服务商自身的图片限制仍然适用。
 
@@ -57,9 +57,9 @@ pi 0.85.0 的核心 Ctrl+V 仅插入临时路径，并不自动将普通路径�
 
 ## 编辑器兼容性
 
-pi 0.85.0 没有公开的自定义原子片段 API。`src/editor-adapter.ts` 集中适配原生 Editor 实例的分段、光标边界、提交展开、粘贴及历史；保留原生布局、撤销、kill ring 和快捷键。对象在缓冲区中带不可见随机身份，显示时移除；普通字面占位符没有身份，不会意外附图。
+pi 当前没有公开的自定义原子片段 API。`src/editor-adapter.ts` 集中适配原生 Editor 实例的分段、光标边界、提交展开、粘贴及历史；保留原生布局、撤销、kill ring 和快捷键。对象在缓冲区中带不可见随机身份，显示时移除；普通字面占位符没有身份，不会意外附图。
 
-扩展通过 `getEditorComponent` / `setEditorComponent` 包装已有工厂，在 `resources_discover`（所有 `session_start` 之后）接入。支持原生 CustomEditor、pi-zentui PolishedEditor 及其已验证的 base 包装结构。未知编辑器结构或非 0.85.0 版本会报错停用，不偷偷改用可拆分文字。其他插件若在运行中强行替换整个编辑器，需要重新 `/reload` 并确认状态。
+扩展通过 `getEditorComponent` / `setEditorComponent` 包装已有工厂，在 `resources_discover`（所有 `session_start` 之后）接入。支持原生 CustomEditor、pi-zentui PolishedEditor 及其已验证的 base 包装结构。未知编辑器结构会报错停用，不偷偷改用可拆分文字。其他插件若在运行中强行替换整个编辑器，需要重新 `/reload` 并确认状态。
 
 目前不保证浏览器直接拖图、远程 SSH、其他系统/版本或将无括号拖入路径逐字节拆分传输的终端。Ghostty 实际键盘/拖拽还需下面的人工验收；PTY 测试不是 Ghostty GUI 自动化。
 
@@ -71,9 +71,9 @@ npm run typecheck
 python3 test/tui-smoke.py
 ```
 
-单元测试直接运行 pi 0.85.0 编辑器，不用自制编辑器替身。PTY 测试启动已安装的 pi，使用隔离设置和输入拦截器验证实际图片附件，不访问模型、不改变用户剪贴板；若找到本机 pi-zentui，会再跑一次组合测试。可用 `ZENTUI_PATH` 指定其 `index.ts`。
+单元测试直接运行当前开发依赖中的 pi 编辑器，不用自制编辑器替身。PTY 测试启动已安装的 pi，使用隔离设置和输入拦截器验证实际图片附件，不访问模型、不改变用户剪贴板；若找到本机 pi-zentui，会再跑一次组合测试。可用 `ZENTUI_PATH` 指定其 `index.ts`。
 
-`@earendil-works/pi-server` 是开发测试依赖，用于补足 0.85.0 非 bundle 入口的模块引用；运行扩展不依赖它。
+`@earendil-works/pi-server` 是开发测试依赖，用于补足非 bundle 入口的模块引用；运行扩展不依赖它。
 
 人工验收：
 

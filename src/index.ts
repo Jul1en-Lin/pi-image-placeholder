@@ -1,4 +1,4 @@
-import { CustomEditor, SettingsManager, VERSION, type ExtensionAPI, type ExtensionContext } from "@earendil-works/pi-coding-agent";
+import { CustomEditor, SettingsManager, type ExtensionAPI, type ExtensionContext } from "@earendil-works/pi-coding-agent";
 import { ImageRegistry, newImageState, type ImageState, type ImageAttachment } from "./images.ts";
 import { installImageEditor, type ImageEditor } from "./editor-adapter.ts";
 
@@ -71,8 +71,8 @@ export default function imagePlaceholders(pi: ExtensionAPI) {
   pi.on("resources_discover", (_event, ctx) => {
     if (ctx.mode !== "tui" || !registry || installed) return;
     installed = true;
-    if (VERSION !== "0.85.0" || process.platform !== "darwin") {
-      ctx.ui.notify(`Image placeholders 未启用：只验证了 pi 0.85.0 / macOS（当前 ${VERSION} / ${process.platform}）。`, "error");
+    if (process.platform !== "darwin") {
+      ctx.ui.notify(`Image placeholders 未启用：当前仅支持 macOS（当前平台：${process.platform}）。`, "error");
       return;
     }
     const previous = ctx.ui.getEditorComponent();

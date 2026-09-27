@@ -46,7 +46,7 @@ function findCore(component: unknown): Editor085 {
         candidate.state && Array.isArray((candidate.state as Editor085["state"]).lines) && Array.isArray(candidate.history)) return candidate as unknown as Editor085;
     candidate = candidate.base as Record<string, unknown>;
   }
-  throw new Error("当前自定义编辑器不兼容 pi 0.85.0 原子片段适配；未替换编辑器。");
+  throw new Error("当前自定义编辑器不兼容原子片段适配；未替换编辑器。");
 }
 
 export function installImageEditor(component: EditorComponent, options: AdapterOptions): ImageEditor {

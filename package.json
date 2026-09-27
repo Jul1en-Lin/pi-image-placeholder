@@ -1,8 +1,8 @@
 {
   "name": "pi-image-placeholder",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
-  "description": "Atomic image placeholders for pi 0.85.0 on macOS",
+  "description": "Atomic image placeholders for pi 0.85.x on macOS",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -30,9 +30,9 @@
     "@mariozechner/clipboard": "0.3.9"
   },
   "devDependencies": {
-    "@earendil-works/pi-coding-agent": "0.85.0",
+    "@earendil-works/pi-coding-agent": "0.85.1",
     "@earendil-works/pi-server": "^0.85.0",
-    "@earendil-works/pi-tui": "0.85.0",
+    "@earendil-works/pi-tui": "0.85.1",
     "@types/node": "^24.0.0",
     "tsx": "^4.20.0",
     "typescript": "^5.9.0"
