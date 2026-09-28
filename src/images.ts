@@ -7,7 +7,18 @@ import { fileURLToPath } from "node:url";
 export const MAX_IMAGE_BYTES = 20 * 1024 * 1024;
 export const MAX_MESSAGE_BYTES = 50 * 1024 * 1024;
 const TOKEN = /\[Image #\d+\]\u2063[\ufe00-\ufe0f]{32}\u2063/g;
-const WIRE = /\[Image #\d+\] "(?:[^"\\]|\\.)*"/g;
+const WIRE = /(\[Image #\d+\]) ("(?:[^"\\]|\\.)*")/g;
+const SNAPSHOT_PATH = /^\/(?:[^/]+\/)*pi-image-placeholder-[A-Za-z0-9]{6}\/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\.(?:png|jpg|gif|webp)$/;
+
+export function displayImagePaths(text: string): string {
+  // Recognize our serialized snapshots without reading files or run-local state:
+  // restored sessions can outlive both the registry and the temporary files.
+  return text.replace(WIRE, (wire: string, label: string, quotedPath: string) => {
+    try {
+      return SNAPSHOT_PATH.test(JSON.parse(quotedPath)) ? label : wire;
+    } catch { return wire; }
+  });
+}
 export interface ImageAttachment {
   type: "image";
   data: string;

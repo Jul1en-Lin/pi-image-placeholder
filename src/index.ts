@@ -1,5 +1,5 @@
 import { CustomEditor, SettingsManager, type ExtensionAPI, type ExtensionContext } from "@earendil-works/pi-coding-agent";
-import { ImageRegistry, newImageState, type ImageState, type ImageAttachment } from "./images.ts";
+import { ImageRegistry, newImageState, displayImagePaths, type ImageState, type ImageAttachment } from "./images.ts";
 import { installImageEditor, type ImageEditor } from "./editor-adapter.ts";
 
 interface ProcessState { sessions: Map<string, ImageState>; files: Map<string, string> }
@@ -28,6 +28,9 @@ export function attachImages(registry: ImageRegistry, text: string, existing: Im
 }
 
 export default function imagePlaceholders(pi: ExtensionAPI) {
+  pi.registerMarkdownTransformer((markdown, { messageType }) =>
+    messageType === "user" ? displayImagePaths(markdown) : markdown);
+
   let registry: ImageRegistry | undefined;
   let editor: ImageEditor | undefined;
   let context: ExtensionContext | undefined;
