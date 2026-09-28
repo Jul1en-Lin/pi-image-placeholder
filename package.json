@@ -2,7 +2,7 @@
   "name": "pi-image-placeholder",
   "version": "0.2.0",
   "type": "module",
-  "description": "Atomic image placeholders for pi 0.85.x on macOS",
+  "description": "Atomic image placeholders for pi on macOS",
   "license": "MIT",
   "repository": {
     "type": "git",
